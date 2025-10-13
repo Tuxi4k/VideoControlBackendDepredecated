@@ -1,0 +1,11 @@
+{
+  "execMap": {
+    "ts": "tsx"
+  },
+  "watch": [".env", "**/*.prisma", "**/*.ts"],
+  "ext": "ts,env,prismas",
+  "ignore": ["node_modules", "dist"],
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

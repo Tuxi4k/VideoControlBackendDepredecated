@@ -1,0 +1,42 @@
+{
+  "name": "video-control-backend",
+  "version": "0.0.1",
+  "description": "Видеоконтроль56.рф бэкенд",
+  "main": "index.ts",
+  "author": "Tuxi4k",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^6.16.3",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "node-telegram-bot-api": "^0.66.0",
+    "nodemailer": "^7.0.6"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "tsx index.ts",
+    "dev": "nodemon index.ts",
+    "build": "tsc",
+    "db:actions": "tsx scripts/dbActions.ts",
+    "db:refresh": "prisma db push --force-reset",
+    "db:generate": "prisma generate",
+    "db:createUser": "tsx scripts/createUser.ts",
+    "db:sanitize": "tsx scripts/dbSanitize.ts",
+    "db:userChange": "tsx scripts/changeUser.ts",
+    "db:userView": "tsx scripts/viewUser.ts",
+    "db:userDelete": "tsx scripts/deleteUser.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "@types/node-telegram-bot-api": "^0.64.0",
+    "@types/nodemailer": "^6.4.0",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.16.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2"
+  }
+}
