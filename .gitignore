@@ -1,7 +1,18 @@
-node_modules
+# Dependencies
+node_modules/
 
+# Package managers
+.yarn/
+.pnp.*
+.yarnrc.yml
+pnpm-lock.yaml
+.bun.lockb
+
+# Environment variables
 .env
 
+# Database
 /prisma/db.sqlite3
 
-scripts
+# Scripts
+scripts/
