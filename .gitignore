@@ -14,3 +14,6 @@ pnpm-lock.yaml
 
 # Database
 db.sqlite3
+
+# Scripts
+scripts/
