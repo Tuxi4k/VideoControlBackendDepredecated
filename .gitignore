@@ -2,6 +2,7 @@
 node_modules
 
 # Package managers
+.github/
 .yarn/
 .pnp.*
 .yarnrc.yml
