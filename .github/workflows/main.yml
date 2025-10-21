@@ -121,6 +121,7 @@ jobs:
         
         # Удаляем старую папку backendApp и создаем заново
         sshpass -p '${{ secrets.SSH_PASSWORD }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SERVER_HOST }} '
+          pm2 stop videoControlBackend
           rm -rf ~/backendApp/dist
           rm -f ~/backendApp/package.json
           rm -rf ~/backendApp/node_modules
@@ -140,8 +141,7 @@ jobs:
 
           echo "${{ secrets.ENV_FILE_PROD }}" > ~/backendApp/.env
           pnpm db_prod:generate
-          # Перезапускаем сервис (замените на вашу команду)
-          # sudo systemctl restart your-backend-service || echo "Service restart skipped"
+          pm2 start videoControlBackend
           echo "Backend deployment completed"
         '
         
