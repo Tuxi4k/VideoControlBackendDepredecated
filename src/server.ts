@@ -8,7 +8,6 @@ import bot from "./shared/telegramBot";
 const startServer = async (): Promise<void> => {
   try {
     await connectDatabase();
-    logger.info("✅ Database connected successfully");
 
     // Исправляем порт - преобразуем в число
     const port =

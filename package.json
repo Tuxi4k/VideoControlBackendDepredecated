@@ -39,7 +39,7 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc && tsc-alias && pnpm copy-files",
-    "copy-files": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/prisma/ && shx cp .env dist/",
+    "copy-files": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/schema.prisma",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
