@@ -22,6 +22,19 @@ model Contact {
   @@map("contacts")
 }
 
+model Product {
+  id           Int      @id @default(autoincrement())
+  name         String
+  count        Int
+  buyPrice     Float 
+  sellPrice    Float
+  marketplace  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("products")
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique

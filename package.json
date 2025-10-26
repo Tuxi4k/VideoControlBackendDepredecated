@@ -2,40 +2,53 @@
   "name": "video-control-backend",
   "version": "0.0.1",
   "description": "Видеоконтроль56.рф бэкенд",
-  "main": "./dist/index.js",
+  "main": "./dist/server.js",
   "author": "Tuxi4k",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "@prisma/client": "^6.16.3",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
+    "express-validator": "^7.3.0",
     "jsonwebtoken": "^9.0.2",
     "node-telegram-bot-api": "^0.66.0",
     "nodemailer": "^7.0.6",
-    "prisma": "^6.17.1"
-  },
-  "type": "module",
-  "scripts": {
-    "start": "node ./dist/index.js",
-    "dev": "nodemon index.ts",
-    "build": "tsc && tsc-alias && pnpm copy-prisma",
-    "copy-prisma": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/schema.prisma",
-    "db_prod:generate": "prisma generate --schema=./dist/schema.prisma",
-    "db_prod:refresh": "prisma db push --force-reset --schema=./dist/schema.prisma",
-    "db:refresh": "prisma db push --force-reset",
-    "db:generate": "prisma generate"
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.5.2",
     "@types/node-telegram-bot-api": "^0.64.0",
     "@types/nodemailer": "^6.4.0",
-    "nodemon": "^3.1.10",
-    "shx": "^0.4.0",
-    "tsc-alias": "^1.8.16",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/cors": "^2.8.17",
+    "@types/morgan": "^1.9.9",
+    "prisma": "^6.17.1",
+    "typescript": "^5.9.2",
     "tsx": "^4.20.6",
-    "typescript": "^5.9.2"
+    "nodemon": "^3.1.10",
+    "tsc-alias": "^1.8.16",
+    "shx": "^0.4.0"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc && tsc-alias && pnpm copy-files",
+    "copy-files": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/prisma/ && shx cp .env dist/",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset",
+    "db:deploy": "prisma migrate deploy",
+    "clean": "shx rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

@@ -2,26 +2,37 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "node10",
+    "moduleResolution": "bundler",
     "lib": ["ES2022"],
     "outDir": "./dist",
-    "rootDir": "./",
-    "strict": false,
+    "rootDir": "./src",
+    "strict": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "types": ["node"],
-    "baseUrl": ".",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"],
-      "@utils/*": ["./utils/*"]
+      "@/*": ["*"],
+      "@config/*": ["config/*"],
+      "@middleware/*": ["middleware/*"],
+      "@shared/*": ["shared/*"],
+      "@client/*": ["client/*"],
+      "@admin/*": ["admin/*"],
+      "@routes/*": ["routes/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "tsc-alias": {
     "resolveFullPaths": true,
     "verbose": false
   },
-  "include": ["**/*"],
+  "include": ["src/**/*", "prisma/**/*"],
   "exclude": ["node_modules", "dist"]
 }
