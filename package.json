@@ -15,22 +15,22 @@
     "express-validator": "^7.3.0",
     "jsonwebtoken": "^9.0.2",
     "node-telegram-bot-api": "^0.66.0",
-    "nodemailer": "^7.0.6"
+    "nodemailer": "^7.0.6",
+    "prisma": "^6.18.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^24.5.2",
     "@types/node-telegram-bot-api": "^0.64.0",
     "@types/nodemailer": "^6.4.0",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.5",
-    "@types/cors": "^2.8.17",
-    "prisma": "^6.17.1",
-    "typescript": "^5.9.2",
-    "tsx": "^4.20.6",
     "nodemon": "^3.1.10",
+    "shx": "^0.4.0",
     "tsc-alias": "^1.8.16",
-    "shx": "^0.4.0"
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
