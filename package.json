@@ -8,7 +8,6 @@
   "type": "module",
   "dependencies": {
     "@libsql/client": "^0.15.15",
-    "drizzle-kit": "^0.31.5",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
@@ -17,30 +16,33 @@
     "express-validator": "^7.3.0",
     "jsonwebtoken": "^9.0.2",
     "node-telegram-bot-api": "^0.66.0",
-    "nodemailer": "^7.0.6"
+    "nodemailer": "^7.0.6",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
-    "@libsql/sqlite3": "^0.3.1",
     "@types/bcryptjs": "^2.4.6",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^24.5.2",
     "@types/node-telegram-bot-api": "^0.64.0",
     "@types/nodemailer": "^6.4.0",
+    "@types/pg": "^8.15.5",
+    "drizzle-kit": "^0.31.5",
+    "embedded-postgres": "17.6.0-beta.15",
     "nodemon": "^3.1.10",
-    "shx": "^0.4.0",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.20.6",
     "typescript": "^5.9.2"
   },
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "nodemon src/server.ts",
+    "dev:db": "tsx --watch dev/startPostgress.ts",
     "start": "node dist/server.js",
     "build": "tsc && tsc-alias",
     "test": "tsc --noEmit",
-    "db:push": "drizzle-kit push"
+    "db:push": "NODE_ENV=development drizzle-kit push",
+    "db_prod:push": "NODE_ENV=production drizzle-kit push"
   },
   "engines": {
     "node": ">=18.0.0"

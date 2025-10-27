@@ -1,21 +1,13 @@
-import { drizzle } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 import * as schema from "../database/schema";
-import { logger } from "../utils/logger";
 
-const client = createClient({
-  url: "file:./db.sqlite3",
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
 });
 
-export const db = drizzle(client, { schema });
+export const db = drizzle(pool, { schema });
 
 export const connectDatabase = async (): Promise<void> => {
-  try {
-    logger.info("✅ Database connected successfully");
-  } catch (error) {
-    logger.error("❌ Database connection failed:", error);
-    throw error;
-  }
+  console.log("✅ PostgreSQL database connected successfully");
 };
-
-export default db;

@@ -1,15 +1,11 @@
 // src/server.ts
 import { app } from "./app";
 import config from "./config/constants";
-import { connectDatabase } from "./config/database";
 import { logger } from "./utils/logger";
 import bot from "./shared/telegramBot";
 
 const startServer = async (): Promise<void> => {
   try {
-    await connectDatabase();
-
-    // Исправляем порт - преобразуем в число
     const port =
       typeof config.PORT === "string" ? parseInt(config.PORT) : config.PORT;
 

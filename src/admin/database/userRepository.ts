@@ -1,25 +1,19 @@
 import { db } from "@config/database";
-import {
-  contacts,
-  users,
-  type Contact,
-  type NewContact,
-  type User,
-} from "@/database/schema";
+import { contacts, users, products } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import type { CreateContactData } from "@/types/requests";
 
 export class UserRepository {
-  async getContacts(): Promise<Contact[]> {
+  async getContacts() {
     return await db.select().from(contacts);
   }
 
-  async getContact(id: number): Promise<Contact | null> {
+  async getContact(id: number) {
     const result = await db.select().from(contacts).where(eq(contacts.id, id));
     return result[0] || null;
   }
 
-  async addContact(contactData: CreateContactData): Promise<boolean> {
+  async addContact(contactData: CreateContactData) {
     const result = await db
       .insert(contacts)
       .values({
@@ -39,23 +33,17 @@ export class UserRepository {
     return result.length > 0;
   }
 
-  async updateContact(
-    id: number,
-    contactData: Partial<Contact>
-  ): Promise<boolean> {
+  async updateContact(id: number, contactData: any) {
     const result = await db
       .update(contacts)
-      .set({
-        ...contactData,
-        updatedAt: new Date(),
-      })
+      .set({ ...contactData, updatedAt: new Date() })
       .where(eq(contacts.id, id))
       .returning();
 
     return result.length > 0;
   }
 
-  async deleteContact(id: number): Promise<boolean> {
+  async deleteContact(id: number) {
     const result = await db
       .delete(contacts)
       .where(eq(contacts.id, id))
@@ -64,8 +52,7 @@ export class UserRepository {
     return result.length > 0;
   }
 
-  // Методы для аутентификации
-  async findByUsername(username: string): Promise<User | null> {
+  async findByUsername(username: string) {
     const result = await db
       .select()
       .from(users)
@@ -73,10 +60,7 @@ export class UserRepository {
     return result[0] || null;
   }
 
-  async updateRefreshToken(
-    username: string,
-    refreshToken: string | null
-  ): Promise<void> {
+  async updateRefreshToken(username: string, refreshToken: string | null) {
     await db
       .update(users)
       .set({
@@ -84,5 +68,15 @@ export class UserRepository {
         updatedAt: new Date(),
       })
       .where(eq(users.username, username));
+  }
+
+  // === PRODUCTS === (заготовка на будущее)
+  async getProducts() {
+    return await db.select().from(products);
+  }
+
+  async getProduct(id: number) {
+    const result = await db.select().from(products).where(eq(products.id, id));
+    return result[0] || null;
   }
 }

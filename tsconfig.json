@@ -34,5 +34,5 @@
     "verbose": false
   },
   "include": ["src/**/*", "prisma/**/*"],
-  "exclude": ["node_modules", "dist", "drizzle.config.ts"]
+  "exclude": ["node_modules", "dist", "dev"]
 }
