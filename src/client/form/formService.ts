@@ -1,17 +1,17 @@
 import { EmailService } from "@shared/emailService";
 import { TelegramService } from "@shared/telegramService";
-import { UserRepository } from "@admin/database/userRepository";
+import { Requests } from "@/admin/database/requests";
 import type { FormData, CreateContactData } from "@/types/requests";
 
 export class FormService {
   private emailService: EmailService;
   private telegramService: TelegramService;
-  private userRepository: UserRepository;
+  private Requests: Requests;
 
   constructor() {
     this.emailService = new EmailService();
     this.telegramService = new TelegramService();
-    this.userRepository = new UserRepository();
+    this.Requests = new Requests();
   }
 
   async processFormSubmission(formData: FormData) {
@@ -27,14 +27,14 @@ export class FormService {
       house: formData.house,
       agreement: formData.agreement,
       email: formData.email,
-      tags: {
-        source: "website_form",
-        timestamp: new Date().toISOString(),
-        ip: "unknown",
-      },
+      tags: [
+        {
+          label: "Заявка",
+        },
+      ],
     };
 
-    const userSaved = await this.userRepository.addContact(contactData);
+    const userSaved = await this.Requests.addContact(contactData);
 
     return {
       telegramSuccess: telegramResult.success,

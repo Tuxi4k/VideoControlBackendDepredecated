@@ -21,14 +21,6 @@ app.use(express.json({ limit: "10mb" }));
 // Routes
 app.use("/api", routes);
 
-// Health check
-app.get("/health", (req, res) => {
-  res.status(200).json({
-    status: "OK",
-    timestamp: new Date().toISOString(),
-  });
-});
-
 // Error handling
 app.use(errorHandler);
 

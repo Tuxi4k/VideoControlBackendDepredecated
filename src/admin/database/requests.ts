@@ -3,7 +3,7 @@ import { contacts, users, products } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import type { CreateContactData } from "@/types/requests";
 
-export class UserRepository {
+export class Requests {
   async getContacts() {
     return await db.select().from(contacts);
   }
@@ -23,10 +23,7 @@ export class UserRepository {
         house: contactData.house,
         agreement: contactData.agreement,
         email: contactData.email,
-        tags: contactData.tags || {
-          source: "website_form",
-          timestamp: new Date().toISOString(),
-        },
+        tags: contactData.tags,
       })
       .returning();
 

@@ -2,7 +2,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "@config/constants";
-import { UserRepository } from "@admin/database/userRepository";
+import { Requests } from "@/admin/database/requests";
 
 export interface AuthResult {
   accessToken: string;
@@ -14,17 +14,17 @@ interface JwtPayload {
 }
 
 export class AuthService {
-  private userRepository: UserRepository;
+  private Requests: Requests;
 
   constructor() {
-    this.userRepository = new UserRepository();
+    this.Requests = new Requests();
   }
 
   async authenticateUser(
     username: string,
     password: string
   ): Promise<AuthResult> {
-    const user = await this.userRepository.findByUsername(username);
+    const user = await this.Requests.findByUsername(username);
 
     if (!user) {
       throw new Error("Invalid credentials");
@@ -43,7 +43,7 @@ export class AuthService {
       expiresIn: config.REFRESH_EXPIRES as jwt.SignOptions["expiresIn"],
     });
 
-    await this.userRepository.updateRefreshToken(username, refreshToken);
+    await this.Requests.updateRefreshToken(username, refreshToken);
 
     return { accessToken, refreshToken };
   }
@@ -54,7 +54,7 @@ export class AuthService {
       config.REFRESH_SECRET
     ) as JwtPayload;
 
-    const user = await this.userRepository.findByUsername(verified.username);
+    const user = await this.Requests.findByUsername(verified.username);
     if (!user || user.lastToken !== oldRefreshToken) {
       throw new Error("Refresh token is invalid or expired");
     }
@@ -71,10 +71,7 @@ export class AuthService {
       { expiresIn: config.REFRESH_EXPIRES as jwt.SignOptions["expiresIn"] }
     );
 
-    await this.userRepository.updateRefreshToken(
-      verified.username,
-      newRefreshToken
-    );
+    await this.Requests.updateRefreshToken(verified.username, newRefreshToken);
 
     return {
       accessToken: newAccessToken,
@@ -87,6 +84,6 @@ export class AuthService {
       refreshToken,
       config.REFRESH_SECRET
     ) as JwtPayload;
-    await this.userRepository.updateRefreshToken(verified.username, null);
+    await this.Requests.updateRefreshToken(verified.username, null);
   }
 }

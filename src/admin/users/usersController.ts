@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { UserRepository } from "@admin/database/userRepository";
+import { Requests } from "@/admin/database/requests";
 import type { Contact } from "@/database/schema"; // Используем Drizzle типы
 
 export class UsersController {
-  private userRepository: UserRepository;
+  private Requests: Requests;
 
   constructor() {
-    this.userRepository = new UserRepository();
+    this.Requests = new Requests();
   }
 
   verify = async (
@@ -27,7 +27,7 @@ export class UsersController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const users = await this.userRepository.getContacts();
+      const users = await this.Requests.getContacts();
       res.json(users);
     } catch (error) {
       next(error);
@@ -41,7 +41,7 @@ export class UsersController {
   ): Promise<void> => {
     try {
       const id = parseInt(req.params.id);
-      const user = await this.userRepository.getContact(id);
+      const user = await this.Requests.getContact(id);
 
       if (user) {
         res.json(user);
@@ -59,7 +59,7 @@ export class UsersController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const userSaved = await this.userRepository.addContact(req.body);
+      const userSaved = await this.Requests.addContact(req.body);
       res.status(201).json({ success: userSaved });
     } catch (error) {
       next(error);
@@ -74,7 +74,7 @@ export class UsersController {
     try {
       const id = parseInt(req.params.id);
       const updateData: Partial<Contact> = req.body; // Используем Drizzle тип
-      const userSaved = await this.userRepository.updateContact(id, updateData);
+      const userSaved = await this.Requests.updateContact(id, updateData);
       res.json({ success: userSaved });
     } catch (error) {
       next(error);
@@ -88,7 +88,7 @@ export class UsersController {
   ): Promise<void> => {
     try {
       const id = parseInt(req.params.id);
-      const userSaved = await this.userRepository.deleteContact(id);
+      const userSaved = await this.Requests.deleteContact(id);
       res.status(204).json({ success: userSaved });
     } catch (error) {
       next(error);

@@ -4,5 +4,5 @@
   },
   "watch": [".env", "**/*.prisma", "**/*.ts"],
   "ext": "ts,env,prismas",
-  "ignore": ["node_modules", "dist"]
+  "ignore": ["node_modules", "dist", "dev"]
 }
