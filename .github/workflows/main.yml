@@ -51,6 +51,7 @@ jobs:
         path: |
           dist/
           package.json
+          drizzle.config.js
         retention-days: 1
 
   deploy-with-vpn:
@@ -124,6 +125,7 @@ jobs:
           rm -rf ~/backendApp/node_modules
           rm -f ~/backendApp/pnpm-lock.yaml
           rm -f ~/backendApp/.env
+          rm -f ~/backendApp/drizzle.config.js
           echo "Cleaned and recreated backendApp directory"
         '
         
