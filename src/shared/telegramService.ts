@@ -1,4 +1,3 @@
-// src/shared/telegramService.ts
 import TelegramBot from "node-telegram-bot-api";
 import { FormData } from "../types/requests";
 import { logger } from "../utils/logger";
