@@ -1,4 +1,3 @@
-// src/server.ts
 import { app } from "./app";
 import config from "./config/constants";
 import { logger } from "./utils/logger";
