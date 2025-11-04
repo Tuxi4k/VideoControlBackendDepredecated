@@ -6,7 +6,6 @@ import routes from "./routes";
 
 export const app = express();
 
-// Middleware
 app.use(
   cors({
     origin: config.CORS_ORIGINS,
@@ -18,10 +17,8 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "10mb" }));
 
-// Routes
 app.use("/api", routes);
 
-// Error handling
 app.use(errorHandler);
 
 export default app;
