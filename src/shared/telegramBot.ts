@@ -1,4 +1,3 @@
-// src/shared/telegramBot.ts
 import config from "@/config/constants";
 import TelegramBot from "node-telegram-bot-api";
 
